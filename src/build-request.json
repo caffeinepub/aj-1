@@ -1,0 +1,200 @@
+{
+  "kind": "build_request",
+  "title": "AJ.1 Multilingual AI Assistant Web App (IC) with Safe, Structured Help",
+  "projectName": "AJ.1 Assistant",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Create an AJ.1 assistant chat experience that lets users enter a question/problem and receive a structured response that follows the workflow: (1) identify the core issue, (2) break into smaller parts, (3) explain step-by-step, (4) provide examples when helpful, and (5) conclude with a clear next action or summary.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "You solve problems logically like a teacher and practically like an engineer.",
+          "If the user gives a problem, you: Understand the core issue; Break it into smaller parts; Explain the solution clearly; Provide examples when needed"
+        ]
+      },
+      "acceptanceCriteria": [
+        "User can type a prompt and see an assistant response rendered in clearly labeled sections that map to the requested workflow.",
+        "The UI supports multi-turn conversation (at least within the current session) with alternating user/assistant messages.",
+        "Assistant responses are formatted for readability (headings/bullets/numbered steps) rather than a single unstructured paragraph."
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Add user controls to adapt explanation level (Beginner / Student / Expert) and ensure the assistant response tone remains calm, friendly, confident, and slightly futuristic across all responses.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "You adapt your explanation level based on the user (beginner, student, expert).",
+          "You remain polite, intelligent, and slightly futuristic in tone."
+        ]
+      },
+      "acceptanceCriteria": [
+        "UI includes a visible explanation-level selector with the three levels (Beginner, Student, Expert).",
+        "Changing the selected level affects the response template (e.g., more foundational definitions for Beginner, more rigor and concise assumptions for Expert).",
+        "Tone guidance is consistently applied in response headers/phrasing (no arrogant or rude language)."
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Implement multilingual understanding/response mode by adding a language selector for major world languages and localizing all UI strings; the assistant should produce responses in the selected language.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "You understand and respond fluently in all major world languages."
+        ]
+      },
+      "acceptanceCriteria": [
+        "UI includes a language selector and all visible UI text is localized for the supported languages.",
+        "Assistant responses are produced in the selected language (at minimum using language-specific response templates and localized section headings).",
+        "The set of supported languages is documented in-app (e.g., in Settings/About) and is implemented in a way that can be extended with additional translations without redesigning the UI."
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "When a user prompt is ambiguous or missing key details, the assistant must ask clarifying questions before attempting a full solution, and it must explicitly state what information is missing.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "If the question is unclear, you ask clarifying questions."
+        ]
+      },
+      "acceptanceCriteria": [
+        "If the user input is below a reasonable minimum detail threshold (e.g., too short or lacks required fields for common problem types), the assistant responds with a short set of clarifying questions instead of a full solution.",
+        "Clarifying questions are actionable (e.g., ask for given values, constraints, goals, environment) and presented as a numbered list."
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "text": "Enforce a safety policy in the assistant response pipeline so the assistant never provides harmful, illegal, or unsafe instructions; it should refuse and redirect to safe alternatives when needed.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "You never give harmful, illegal, or unsafe instructions."
+        ]
+      },
+      "acceptanceCriteria": [
+        "There is a consistent refusal style for disallowed requests that explains the refusal briefly and offers safe, legal alternatives.",
+        "Safety enforcement runs before displaying an assistant response (i.e., unsafe content is blocked even if generated by templates/logic).",
+        "A small, user-facing Safety note is available (e.g., in About) describing that unsafe/illegal instructions are not provided."
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "text": "Persist per-user settings (selected language, explanation level) and conversation history linked to the authenticated Internet Identity principal, so returning users can continue where they left off.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Your goal: To provide crystal-clear answers and powerful problem-solving support in any subject including coding, science, maths, life advice, technology, and creativity."
+        ]
+      },
+      "acceptanceCriteria": [
+        "After signing in with Internet Identity, user settings persist across reloads.",
+        "Chat history persists per signed-in user and can be cleared by the user via an explicit action.",
+        "Unauthenticated users can still use the app with session-only state, with a clear prompt to sign in for persistence."
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "text": "Apply a coherent visual theme and layout for AJ.1 that feels calm and slightly futuristic, using a consistent palette, typography, spacing, and component styling across the app (do not use a blue/purple primary scheme).",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "You remain polite, intelligent, and slightly futuristic in tone.",
+          "Your personality: Calm; Smart; Logical; Friendly; Confident"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The app has a consistent theme (colors, type scale, spacing) across chat, settings, and any empty/loading states.",
+        "Primary styling avoids blue/purple as the dominant theme colors.",
+        "Chat UI is responsive and usable on mobile-sized viewports."
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "text": "Brand the application as “AJ.1” throughout the UI (header/title/about) and provide an app icon and simple logo/wordmark for AJ.1 as static assets.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "name of the apk is AJ.1"
+        ]
+      },
+      "acceptanceCriteria": [
+        "App header/title uses “AJ.1” consistently.",
+        "Generated icon/logo assets are stored under frontend/public/assets/generated and displayed in the UI (e.g., header and/or about screen)."
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "text": "Document APK-related expectations in-app: clearly state that this deliverable is a web app on the Internet Computer, and provide a short note that packaging into an Android APK would be a separate, external step not produced by this build.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "You can create apk for AI assistant and name of the apk is AJ.1"
+        ]
+      },
+      "acceptanceCriteria": [
+        "About/Help includes a short, clear statement that the project outputs a web app and does not directly generate an Android APK within this build.",
+        "The note does not reference unsupported tooling; it simply sets expectations and suggests that APK packaging would be a separate step."
+      ]
+    }
+  ],
+  "constraints": [
+    "Use the existing React + TypeScript + Tailwind + Shadcn UI + React Query frontend stack; compose existing UI components without editing immutable paths under frontend/src/components/ui or the listed immutable hook/entry files.",
+    "Backend must remain a single Motoko actor in backend/main.mo; only add migration.mo if an upgrade-safe state migration is required.",
+    "Do not integrate third-party authentication providers; only Internet Identity is allowed.",
+    "Do not integrate external LLM APIs or other AI service providers (no OpenAI/Anthropic/etc.).",
+    "Use English for any user-facing text in this build request (specification), even though the app itself supports multiple languages."
+  ],
+  "nonGoals": [
+    "Generating or delivering a native Android APK within this build.",
+    "Real-time messaging via WebSockets/socket.io or push notifications.",
+    "Using external databases or non-Motoko backend services.",
+    "Full human-level multilingual fluency via external AI models; this build focuses on multilingual UI + language-specific response templates and structured problem-solving flows within platform constraints."
+  ],
+  "imageRequirements": {
+    "required": [
+      "AJ.1 app icon in a calm futuristic style (aj1-icon.dim_512x512.png)",
+      "AJ.1 minimalist wordmark/logo on transparent background (aj1-logo.dim_1024x256.png)"
+    ],
+    "edits": []
+  },
+  "userProfileUpdate": {
+    "goalsToAdd": [],
+    "goalsToRemove": [],
+    "preferencesToAdd": [],
+    "preferencesToRemove": [],
+    "miscToAdd": [],
+    "miscToRemove": [],
+    "fieldsToSet": {},
+    "fieldsToDelete": []
+  }
+}

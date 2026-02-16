@@ -1,0 +1,7 @@
+{
+  "frontend/src/i18n/translations.ts": "Complete translation dictionary for all UI strings across all supported languages including Turkish, Arabic, and Hindi.",
+  "frontend/src/assistant/safetyPolicy.ts": "Safety policy enforcement with keyword detection and localized refusal messages for all supported languages.",
+  "frontend/src/assistant/clarifyingQuestions.ts": "Generates clarifying questions in all supported languages when user prompts are too vague or short.",
+  "frontend/src/assistant/responseTemplates.ts": "Template-based structured response generator with section titles and content for all supported languages and explanation levels.",
+  "frontend/src/components/chat/MessageBubble.tsx": "Message bubble component with custom lightweight markdown renderer that formats headings, lists, bold text, and horizontal rules without external dependencies, using ReactElement type instead of JSX.Element."
+}

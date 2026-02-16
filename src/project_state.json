@@ -1,0 +1,131 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 3,
+  "summary": "Build an Android APK for an AI assistant named AJ.1 with multilingual fluency, clear step-by-step explanations, logical problem-solving, adaptive explanation level, clarifying questions when needed, and safety-focused behavior with a calm, slightly futuristic personality.",
+  "architectural_notes": [],
+  "known_issues": [],
+  "isFixRequest": false,
+  "imageRequirements": "## Required Images\n- AJ.1 app icon in a calm futuristic style (aj1-icon.dim_512x512.png)\n- AJ.1 minimalist wordmark/logo on transparent background (aj1-logo.dim_1024x256.png)",
+  "existing_features": [
+    {
+      "id": "feature-create-an-aj-1-assistant-chat-experience-that-lets-users-enter-a-question-problem-and-receive-a-structured-response-that-follows-the-workflow-1-identify-the-core-issue-2-break-into-smaller-parts-3-explain-step-by-step-4-provide-examples-when-helpful-and-5-conclude-with-a-clear-next-action-or-summary",
+      "title": "Create an AJ.1 assistant chat experience that lets users enter a question/problem and receive a structured response that follows the workflow: (1) identify the core issue, (2) break into smaller parts, (3) explain step-by-step, (4) provide examples when helpful, and (5) conclude with a clear next action or summary.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-user-controls-to-adapt-explanation-level-beginner-student-expert-and-ensure-the-assistant-response-tone-remains-calm-friendly-confident-and-slightly-futuristic-across-all-responses",
+      "title": "Add user controls to adapt explanation level (Beginner / Student / Expert) and ensure the assistant response tone remains calm, friendly, confident, and slightly futuristic across all responses.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-multilingual-understanding-response-mode-by-adding-a-language-selector-for-major-world-languages-and-localizing-all-ui-strings-the-assistant-should-produce-responses-in-the-selected-language",
+      "title": "Implement multilingual understanding/response mode by adding a language selector for major world languages and localizing all UI strings; the assistant should produce responses in the selected language.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-when-a-user-prompt-is-ambiguous-or-missing-key-details-the-assistant-must-ask-clarifying-questions-before-attempting-a-full-solution-and-it-must-explicitly-state-what-information-is-missing",
+      "title": "When a user prompt is ambiguous or missing key details, the assistant must ask clarifying questions before attempting a full solution, and it must explicitly state what information is missing.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-enforce-a-safety-policy-in-the-assistant-response-pipeline-so-the-assistant-never-provides-harmful-illegal-or-unsafe-instructions-it-should-refuse-and-redirect-to-safe-alternatives-when-needed",
+      "title": "Enforce a safety policy in the assistant response pipeline so the assistant never provides harmful, illegal, or unsafe instructions; it should refuse and redirect to safe alternatives when needed.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-persist-per-user-settings-selected-language-explanation-level-and-conversation-history-linked-to-the-authenticated-internet-identity-principal-so-returning-users-can-continue-where-they-left-off",
+      "title": "Persist per-user settings (selected language, explanation level) and conversation history linked to the authenticated Internet Identity principal, so returning users can continue where they left off.",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-apply-a-coherent-visual-theme-and-layout-for-aj-1-that-feels-calm-and-slightly-futuristic-using-a-consistent-palette-typography-spacing-and-component-styling-across-the-app-do-not-use-a-blue-purple-primary-scheme",
+      "title": "Apply a coherent visual theme and layout for AJ.1 that feels calm and slightly futuristic, using a consistent palette, typography, spacing, and component styling across the app (do not use a blue/purple primary scheme).",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-brand-the-application-as-aj-1-throughout-the-ui-header-title-about-and-provide-an-app-icon-and-simple-logo-wordmark-for-aj-1-as-static-assets",
+      "title": "Brand the application as “AJ.1” throughout the UI (header/title/about) and provide an app icon and simple logo/wordmark for AJ.1 as static assets.",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-document-apk-related-expectations-in-app-clearly-state-that-this-deliverable-is-a-web-app-on-the-internet-computer-and-provide-a-short-note-that-packaging-into-an-android-apk-would-be-a-separate-external-step-not-produced-by-this-build",
+      "title": "Document APK-related expectations in-app: clearly state that this deliverable is a web app on the Internet Computer, and provide a short note that packaging into an Android APK would be a separate, external step not produced by this build.",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Create an Android APK app for the AI assistant named AJ.1",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Support fluent understanding and responses in all major world languages",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Provide simple, step-by-step explanations for complex topics with examples when needed",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Implement structured, accurate, confident problem-solving workflow (identify core issue, break down, explain clearly)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Ask clarifying questions when the user query is unclear",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-6",
+      "summary": "Enforce safety policy: never provide harmful, illegal, or unsafe instructions",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-7",
+      "summary": "Adapt explanation level to the user (beginner/student/expert) and maintain calm, friendly, slightly futuristic tone",
+      "reqIds": [],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "AJ.1",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

@@ -1,0 +1,197 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-create-an-aj-1-assistant-chat-experience-that-lets-users-enter-a-question-problem-and-receive-a-structured-response-that-follows-the-workflow-1-identify-the-core-issue-2-break-into-smaller-parts-3-explain-step-by-step-4-provide-examples-when-helpful-and-5-conclude-with-a-clear-next-action-or-summary",
+      "featureTitle": "Create an AJ.1 assistant chat experience that lets users enter a question/problem and receive a structured response that follows the workflow: (1) identify the core issue, (2) break into smaller parts, (3) explain step-by-step, (4) provide examples when helpful, and (5) conclude with a clear next action or summary.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/assistant/structuredResponse.ts",
+        "frontend/src/components/chat/ChatView.tsx",
+        "frontend/src/components/chat/MessageBubble.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-1"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-user-controls-to-adapt-explanation-level-beginner-student-expert-and-ensure-the-assistant-response-tone-remains-calm-friendly-confident-and-slightly-futuristic-across-all-responses",
+      "featureTitle": "Add user controls to adapt explanation level (Beginner / Student / Expert) and ensure the assistant response tone remains calm, friendly, confident, and slightly futuristic across all responses.",
+      "files": [
+        "frontend/src/assistant/responseTemplates.ts",
+        "frontend/src/components/chat/ChatView.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-2"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-multilingual-understanding-response-mode-by-adding-a-language-selector-for-major-world-languages-and-localizing-all-ui-strings-the-assistant-should-produce-responses-in-the-selected-language",
+      "featureTitle": "Implement multilingual understanding/response mode by adding a language selector for major world languages and localizing all UI strings; the assistant should produce responses in the selected language.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/assistant/responseTemplates.ts",
+        "frontend/src/components/about/AboutPanel.tsx",
+        "frontend/src/i18n/supportedLanguages.ts",
+        "frontend/src/i18n/translations.ts",
+        "frontend/src/i18n/useI18n.ts"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-3"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-when-a-user-prompt-is-ambiguous-or-missing-key-details-the-assistant-must-ask-clarifying-questions-before-attempting-a-full-solution-and-it-must-explicitly-state-what-information-is-missing",
+      "featureTitle": "When a user prompt is ambiguous or missing key details, the assistant must ask clarifying questions before attempting a full solution, and it must explicitly state what information is missing.",
+      "files": [
+        "frontend/src/assistant/clarifyingQuestions.ts",
+        "frontend/src/assistant/structuredResponse.ts",
+        "frontend/src/components/chat/ChatView.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-4"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-enforce-a-safety-policy-in-the-assistant-response-pipeline-so-the-assistant-never-provides-harmful-illegal-or-unsafe-instructions-it-should-refuse-and-redirect-to-safe-alternatives-when-needed",
+      "featureTitle": "Enforce a safety policy in the assistant response pipeline so the assistant never provides harmful, illegal, or unsafe instructions; it should refuse and redirect to safe alternatives when needed.",
+      "files": [
+        "frontend/src/assistant/safetyPolicy.ts",
+        "frontend/src/assistant/structuredResponse.ts",
+        "frontend/src/components/about/AboutPanel.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-5"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-persist-per-user-settings-selected-language-explanation-level-and-conversation-history-linked-to-the-authenticated-internet-identity-principal-so-returning-users-can-continue-where-they-left-off",
+      "featureTitle": "Persist per-user settings (selected language, explanation level) and conversation history linked to the authenticated Internet Identity principal, so returning users can continue where they left off.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/auth/LoginButton.tsx",
+        "frontend/src/components/chat/PersistenceNotice.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-6"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-apply-a-coherent-visual-theme-and-layout-for-aj-1-that-feels-calm-and-slightly-futuristic-using-a-consistent-palette-typography-spacing-and-component-styling-across-the-app-do-not-use-a-blue-purple-primary-scheme",
+      "featureTitle": "Apply a coherent visual theme and layout for AJ.1 that feels calm and slightly futuristic, using a consistent palette, typography, spacing, and component styling across the app (do not use a blue/purple primary scheme).",
+      "files": [
+        "frontend/src/components/chat/ChatView.tsx",
+        "frontend/src/components/layout/AppLayout.tsx",
+        "frontend/src/index.css",
+        "frontend/tailwind.config.js"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-7"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-brand-the-application-as-aj-1-throughout-the-ui-header-title-about-and-provide-an-app-icon-and-simple-logo-wordmark-for-aj-1-as-static-assets",
+      "featureTitle": "Brand the application as “AJ.1” throughout the UI (header/title/about) and provide an app icon and simple logo/wordmark for AJ.1 as static assets.",
+      "files": [
+        "frontend/src/components/about/AboutPanel.tsx",
+        "frontend/src/components/brand/AJ1Brand.tsx",
+        "frontend/src/components/layout/AppLayout.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-8"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-document-apk-related-expectations-in-app-clearly-state-that-this-deliverable-is-a-web-app-on-the-internet-computer-and-provide-a-short-note-that-packaging-into-an-android-apk-would-be-a-separate-external-step-not-produced-by-this-build",
+      "featureTitle": "Document APK-related expectations in-app: clearly state that this deliverable is a web app on the Internet Computer, and provide a short note that packaging into an Android APK would be a separate, external step not produced by this build.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/about/AboutPanel.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-9"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

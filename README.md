@@ -1,2 +1,3 @@
-# aj-1
-Exported from Caffeine project: AJ.1
+## AJ.1
+
+To run app build and run docker image: `docker build -t app . docker run -it --network host app`

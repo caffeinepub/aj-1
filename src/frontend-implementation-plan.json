@@ -1,0 +1,293 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "AJ.1 Multilingual AI Assistant Web App (Frontend Plan)",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "summary": "Implement an AJ.1 chat UI with multi-turn conversation and clearly sectioned, structured assistant responses.",
+      "acceptanceCriteria": [
+        "User can type a prompt and see an assistant response rendered in clearly labeled sections that map to the requested workflow.",
+        "The UI supports multi-turn conversation (at least within the current session) with alternating user/assistant messages.",
+        "Assistant responses are formatted for readability (headings/bullets/numbered steps) rather than a single unstructured paragraph."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "create",
+          "description": "Create the main AJ.1 application shell with header + chat layout, message list, prompt input, and multi-turn in-session state handling."
+        },
+        {
+          "path": "frontend/src/components/chat/ChatView.tsx",
+          "operation": "create",
+          "description": "Implement the chat experience UI (message list, empty/loading states, prompt composer) and render assistant responses using labeled sections (core issue, breakdown, steps, examples, next action/summary)."
+        },
+        {
+          "path": "frontend/src/components/chat/MessageBubble.tsx",
+          "operation": "create",
+          "description": "Add a presentational message component for alternating user/assistant messages with readable formatting and responsive spacing."
+        },
+        {
+          "path": "frontend/src/assistant/structuredResponse.ts",
+          "operation": "create",
+          "description": "Implement a structured response builder that converts a user prompt + settings into a sectioned response model matching the required workflow."
+        },
+        {
+          "path": "frontend/src/assistant/markdownRender.tsx",
+          "operation": "create",
+          "description": "Add a lightweight renderer for section content (headings, bullets, numbered steps) to ensure assistant responses are not shown as a single unstructured paragraph."
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Add explanation-level controls (Beginner/Student/Expert) and apply calm, friendly, confident, slightly futuristic tone guidance in responses.",
+      "acceptanceCriteria": [
+        "UI includes a visible explanation-level selector with the three levels (Beginner, Student, Expert).",
+        "Changing the selected level affects the response template (e.g., more foundational definitions for Beginner, more rigor and concise assumptions for Expert).",
+        "Tone guidance is consistently applied in response headers/phrasing (no arrogant or rude language)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/settings/ExplanationLevelSelect.tsx",
+          "operation": "create",
+          "description": "Create an explanation-level selector (Beginner/Student/Expert) and expose its value to chat generation logic."
+        },
+        {
+          "path": "frontend/src/assistant/responseTemplates.ts",
+          "operation": "create",
+          "description": "Add level-aware response templates and tone phrasing rules (calm, friendly, confident, slightly futuristic) used by the structured response builder."
+        },
+        {
+          "path": "frontend/src/components/chat/ChatView.tsx",
+          "operation": "modify",
+          "description": "Wire the explanation-level selector into the chat view so changing it impacts subsequent assistant responses."
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "Implement multilingual mode with a language selector, localized UI strings, and language-specific assistant section headings/templates; document supported languages in-app.",
+      "acceptanceCriteria": [
+        "UI includes a language selector and all visible UI text is localized for the supported languages.",
+        "Assistant responses are produced in the selected language (at minimum using language-specific response templates and localized section headings).",
+        "The set of supported languages is documented in-app (e.g., in Settings/About) and is implemented in a way that can be extended with additional translations without redesigning the UI."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/i18n/supportedLanguages.ts",
+          "operation": "create",
+          "description": "Define the supported language list (matching the Language enum) and a single source of truth for language labels for the UI."
+        },
+        {
+          "path": "frontend/src/i18n/translations.ts",
+          "operation": "create",
+          "description": "Add translation dictionaries for all UI strings used across chat, settings, and about/help, structured for easy extension."
+        },
+        {
+          "path": "frontend/src/i18n/useI18n.ts",
+          "operation": "create",
+          "description": "Implement a small i18n hook/helper that provides current language, translator function, and formatting helpers for localized UI strings."
+        },
+        {
+          "path": "frontend/src/components/settings/LanguageSelect.tsx",
+          "operation": "create",
+          "description": "Create a language selector UI component and connect it to the app settings state."
+        },
+        {
+          "path": "frontend/src/assistant/responseTemplates.ts",
+          "operation": "modify",
+          "description": "Extend templates to produce responses in the selected language, including localized section headings."
+        },
+        {
+          "path": "frontend/src/components/about/AboutPanel.tsx",
+          "operation": "create",
+          "description": "Create an in-app About/Help panel that lists the supported languages and explains how to extend translations without redesigning the UI."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wire the language selector and i18n provider/state so all visible UI text is localized and the selected language is used by the assistant response pipeline."
+        }
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "summary": "Detect ambiguous/insufficient prompts and ask clarifying questions (explicitly stating missing info) before generating a full solution.",
+      "acceptanceCriteria": [
+        "If the user input is below a reasonable minimum detail threshold (e.g., too short or lacks required fields for common problem types), the assistant responds with a short set of clarifying questions instead of a full solution.",
+        "Clarifying questions are actionable (e.g., ask for given values, constraints, goals, environment) and presented as a numbered list."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/assistant/clarifyingQuestions.ts",
+          "operation": "create",
+          "description": "Implement prompt ambiguity/minimum-detail heuristics and generate localized, actionable clarifying questions (numbered list) including an explicit 'missing information' statement."
+        },
+        {
+          "path": "frontend/src/assistant/structuredResponse.ts",
+          "operation": "modify",
+          "description": "Add a pre-check that routes ambiguous prompts to the clarifying-questions response path instead of producing a full structured solution."
+        },
+        {
+          "path": "frontend/src/components/chat/ChatView.tsx",
+          "operation": "modify",
+          "description": "Ensure clarifying-question responses render as numbered lists and are clearly distinguished from full solutions."
+        }
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "summary": "Enforce a safety policy that blocks harmful/illegal/unsafe instructions with a consistent refusal style and a user-facing Safety note in About.",
+      "acceptanceCriteria": [
+        "There is a consistent refusal style for disallowed requests that explains the refusal briefly and offers safe, legal alternatives.",
+        "Safety enforcement runs before displaying an assistant response (i.e., unsafe content is blocked even if generated by templates/logic).",
+        "A small, user-facing Safety note is available (e.g., in About) describing that unsafe/illegal instructions are not provided."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/assistant/safetyPolicy.ts",
+          "operation": "create",
+          "description": "Implement a frontend safety classifier + refusal response generator that runs before rendering any assistant message, and provides safe alternatives."
+        },
+        {
+          "path": "frontend/src/assistant/structuredResponse.ts",
+          "operation": "modify",
+          "description": "Run safety enforcement before finalizing/displaying assistant output; if disallowed, return the refusal-style structured response instead."
+        },
+        {
+          "path": "frontend/src/components/about/AboutPanel.tsx",
+          "operation": "modify",
+          "description": "Add a short Safety note stating AJ.1 does not provide unsafe/illegal instructions and will redirect to safer alternatives."
+        }
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "summary": "Persist per-user settings and conversation history for authenticated Internet Identity users; provide session-only mode for guests with a sign-in prompt; allow clearing history.",
+      "acceptanceCriteria": [
+        "After signing in with Internet Identity, user settings persist across reloads.",
+        "Chat history persists per signed-in user and can be cleared by the user via an explicit action.",
+        "Unauthenticated users can still use the app with session-only state, with a clear prompt to sign in for persistence."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/auth/LoginButton.tsx",
+          "operation": "create",
+          "description": "Add a Login/Logout button using the selected \"authorization\" component’s Internet Identity flow guidance; clear React Query cache on logout. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/hooks/useUserSettings.ts",
+          "operation": "create",
+          "description": "Create a React Query hook that loads/saves user settings via the actor when authenticated, and falls back to in-memory/session-only state when not authenticated."
+        },
+        {
+          "path": "frontend/src/hooks/useConversationHistory.ts",
+          "operation": "create",
+          "description": "Create a React Query hook that loads/saves conversation history via the actor when authenticated, and uses session-only state when unauthenticated."
+        },
+        {
+          "path": "frontend/src/components/chat/ClearHistoryButton.tsx",
+          "operation": "create",
+          "description": "Add an explicit 'Clear history' action that clears persisted history for authenticated users (via actor) and clears session-only history for guests."
+        },
+        {
+          "path": "frontend/src/components/chat/PersistenceNotice.tsx",
+          "operation": "create",
+          "description": "Add a small in-chat notice/banner explaining that guests are in session-only mode and can sign in with Internet Identity for persistence."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wire authentication status (useInternetIdentity), actor access (useActor), settings persistence hooks, history persistence hooks, and include login controls and clear-history actions in the UI. Use the selected \"authorization\" component patterns for cache clearing and auth error handling. Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "summary": "Apply a calm, slightly futuristic AJ.1 visual theme (non-blue/purple primary) with consistent styling and responsive chat layout.",
+      "acceptanceCriteria": [
+        "The app has a consistent theme (colors, type scale, spacing) across chat, settings, and any empty/loading states.",
+        "Primary styling avoids blue/purple as the dominant theme colors.",
+        "Chat UI is responsive and usable on mobile-sized viewports."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/index.css",
+          "operation": "create",
+          "description": "Define global theme tokens (CSS variables used by Tailwind/shadcn styling), selecting a calm, slightly futuristic palette that avoids blue/purple as the primary colors; include consistent typography/spacing defaults."
+        },
+        {
+          "path": "frontend/tailwind.config.js",
+          "operation": "modify",
+          "description": "Adjust/extend theme tokens as needed to support the AJ.1 palette and consistent typography/spacing across the app while keeping existing Tailwind + shadcn variable-based color approach."
+        },
+        {
+          "path": "frontend/src/components/layout/AppLayout.tsx",
+          "operation": "create",
+          "description": "Create a responsive layout wrapper (header + main content) with consistent padding, max widths, and mobile-friendly chat behavior."
+        },
+        {
+          "path": "frontend/src/components/chat/ChatView.tsx",
+          "operation": "modify",
+          "description": "Ensure the chat UI is responsive (mobile-sized viewports), with sensible stacking, scrolling, and touch-friendly controls under the AJ.1 theme."
+        }
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "summary": "Brand the UI as “AJ.1” and include an app icon and logo/wordmark as static assets displayed in the UI.",
+      "acceptanceCriteria": [
+        "App header/title uses “AJ.1” consistently.",
+        "Generated icon/logo assets are stored under frontend/public/assets/generated and displayed in the UI (e.g., header and/or about screen)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/public/assets/generated/aj1-icon.dim_512x512.png",
+          "operation": "create",
+          "description": "Add the generated AJ.1 app icon asset at the required path so it can be referenced by the UI."
+        },
+        {
+          "path": "frontend/public/assets/generated/aj1-logo.dim_1024x256.png",
+          "operation": "create",
+          "description": "Add the generated AJ.1 wordmark/logo asset at the required path so it can be referenced by the UI."
+        },
+        {
+          "path": "frontend/src/components/brand/AJ1Brand.tsx",
+          "operation": "create",
+          "description": "Create a small brand component that displays “AJ.1” and renders the generated logo/icon assets from frontend/public/assets/generated for use in header/about."
+        },
+        {
+          "path": "frontend/src/components/layout/AppLayout.tsx",
+          "operation": "modify",
+          "description": "Show AJ.1 branding (title and/or logo) in the header using the AJ1Brand component and ensure consistent app naming across the UI."
+        },
+        {
+          "path": "frontend/src/components/about/AboutPanel.tsx",
+          "operation": "modify",
+          "description": "Display the generated AJ.1 icon/logo in About/Help and restate the app name “AJ.1” prominently."
+        }
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "summary": "Add an in-app About/Help note clarifying this deliverable is an IC web app and APK packaging is a separate external step not produced here.",
+      "acceptanceCriteria": [
+        "About/Help includes a short, clear statement that the project outputs a web app and does not directly generate an Android APK within this build.",
+        "The note does not reference unsupported tooling; it simply sets expectations and suggests that APK packaging would be a separate step."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/about/AboutPanel.tsx",
+          "operation": "modify",
+          "description": "Add an APK expectations section stating this build outputs a web app on the Internet Computer and that packaging into an Android APK would be a separate external step not produced by this build."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Ensure the About/Help panel is reachable from the main UI (e.g., header action) so users can find the APK expectations note."
+        }
+      ]
+    }
+  ]
+}
